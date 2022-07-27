@@ -99,6 +99,6 @@ form.addEventListener("submit", function (e) {
       onSingup()
     }
   }else{
-   alert(123)
+    console.log("Error")
   }
 })
