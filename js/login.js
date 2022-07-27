@@ -27,6 +27,8 @@ function checkEmail(input) {
 function checkPasswords(input1) {
     if (input1.value == "") {
       showError(input1, "Passwords don't match");
+    }else{
+      showSuccess(input1)
     }
   }
   
@@ -57,10 +59,6 @@ if (userChk) {
   showError(email, `worng email`);
   showError(password, `worng password`);
 }
-setTimeout(() => {
-  message.innerHTML = "";
-}, 1000)
-
 }
 form.addEventListener("submit", function (e) {
   e.preventDefault();

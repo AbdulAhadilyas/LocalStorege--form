@@ -11,8 +11,6 @@ function showError(input, message) {
   small.innerText = message;
 }
 
-
-
 function checkEmail(input) {
   const re =
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -26,22 +24,37 @@ function checkEmail(input) {
 function showSuccess(input) {
   const formControl = input.parentElement;
   formControl.className = "form-control success";
+  return true;
 }
 
-function checkRequired(inputArray) {
-  inputArray.forEach(function (input) {
-    if (input.value === "") {
-      console.log(input.id);
-      showError(input, `${getFieldId(input)} is required`);
-    } else {
-      showSuccess(input);
-    }
-  });
+// function checkRequired(inputArray) {
+//   inputArray.forEach(function (input) {
+//     if (input.value === "") {
+//       console.log(input.id);
+//       showError(input, `${getFieldId(input)} is required`);
+//     } else {
+//       showSuccess(input);
+//       return true;
+//     }
+//   }
+//   );
+// }
+function checkRequired (input) {
+  if (input.value === "") {
+    console.log(input.id);
+    showError(input, `${getFieldId(input)} is required`);
+  } else {
+    showSuccess(input);
+    return true;
+  }
 }
 
 function checkPasswordsMatch(input1, input2) {
   if (input1.value !== input2.value) {
     showError(input2, "Passwords don't match");
+    return false;
+  }else{
+    return true;
   }
 }
 
@@ -67,8 +80,9 @@ function onSingup() {
   });
   console.log(userChk);
 
+ 
   if (userChk == -1) {
-    users.push(newUser);
+    users.push(newUser);                                           
     localStorage.setItem("users", JSON.stringify(users));
     window.location.href = "./html/login.html";
   } else {
@@ -77,17 +91,14 @@ function onSingup() {
   }
 }
 
-form.addEventListener("submit", function (e) {
+form.addEventListener("submit", function (e) {                        
   e.preventDefault();
-  checkRequired([username, password, password2]);
   checkEmail(email);
-  checkPasswordsMatch(password, password2);
-  onSingup();
-});
-
-
-
-
-
-
-
+  if (checkRequired(username),checkRequired(email),checkRequired(password),checkRequired(password2)===true){
+    if(checkPasswordsMatch(password,password2) === true){
+      onSingup()
+    }
+  }else{
+   alert(123)
+  }
+})
