@@ -56,8 +56,8 @@ if (userChk) {
   localStorage.setItem("user", JSON.stringify(userChk));
   window.location.href = "./home.html";
 } else {
-  showError(email, `worng email`);
-  showError(password, `worng password`);
+  showError(email, `wrong email`);
+  showError(password, `wrong password`);
 }
 }
 form.addEventListener("submit", function (e) {
